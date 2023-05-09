@@ -1,0 +1,83 @@
+@use 'base.scss';
+
+.homes {
+  grid-column: center-start / center-end;
+  margin: 15rem 0; // top/bottom - left/right
+
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(25rem, 1fr));
+  gap: 7rem;
+}
+
+.home {
+  background-color: base.$color-grey-light-1;
+
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  row-gap: 3.5rem;
+
+  &__img {
+    width: 100%;
+    grid-row: 1 / 2; // we define this because like button change the grid when we set it its place. Like button(svg) sits on the house img.
+    grid-column: 1 / -1; // we can use -1 because we defined the columns. (Explicit Grids)
+    z-index: 1; // z-index works in grid without define any position property.
+  }
+
+  &__like {
+    grid-row: 1 / 2; // Like button(svg) sits on the house img.
+    grid-column: 2 / 3;
+    justify-self: end; // to align the like btn only on the right side of the house image.
+    margin: 1rem; // to completely align its position on the house img.
+    fill: base.$color-primary;
+    height: 2.5rem;
+    width: 2.5rem;
+    z-index: 2; // z-index works in grid without define any position property. // Like button(svg) sits on the house img.
+  }
+
+  &__name {
+    grid-row: 1 / 2;
+    grid-column: 1 / -1; // we can use -1 because we defined the columns. (Explicit Grids)
+    justify-self: center;
+    align-self: end;
+    z-index: 3;
+    width: 80%; // this 80% is the part of the align the name in the center correctly. (lecture 113)
+    transform: translateY(50%);
+    // ⬆️ 50% -> it was sitting bottom of the row cause we defined with align-self and now 50% itself to down to center it.
+
+    font-family: base.$font-display;
+    font-size: 1.6rem;
+    text-align: center;
+    padding: 1.25rem;
+    background-color: base.$color-secondary;
+    color: #fff;
+    font-weight: 400;
+  }
+
+  &__location,
+  &__rooms {
+    margin-top: 2.5rem; // to create desired gap between __name and the __location and __rooms row.
+  }
+
+  &__location,
+  &__rooms,
+  &__area,
+  &__price {
+    font-size: 1.5rem;
+    margin-left: 2rem;
+
+    display: flex;
+    align-items: center;
+    gap: 1rem; // we can use this or margin-right in the svg icon ⤵️
+
+    svg {
+      fill: base.$color-primary;
+      height: 2rem;
+      width: 2rem;
+      // margin-right: 1rem;
+    }
+  }
+
+  &__btn {
+    grid-column: 1 / -1; // we can use -1 because we defined the columns. (Explicit Grids)
+  }
+}

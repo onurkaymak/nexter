@@ -1,0 +1,41 @@
+@use 'base.scss';
+
+.features {
+  grid-column: center-start / center-end;
+
+  margin: 15rem 0;
+
+  display: grid;
+
+  // Fixing the columns for different screen size without media query. It decrease the columns size from 3 to 2 depends on screen size.
+  // grid-template-columns: repeat(3, 1fr); ---> Without screen size fix.
+
+  // ------> Columns adjust by screen size. ⬇️
+  // autofit create as many tracks as can fit based on the width we define, we define the width with minmax function.
+  // VERY IMPORTANT --->  The features section stops growing in width after it reaches 1120px (where 4 columns could never fit into)
+  // .features defines on center-start / center-end which is 1120px but 4 column feature container with gutters = 1180px.
+  grid-template-columns: repeat(auto-fit, minmax(25rem, 1fr));
+  grid-gap: 6rem;
+  align-items: start; // align items on the top of the grid container so they will look align. // default was stretch, causes items unalign.
+}
+
+.feature {
+  display: grid;
+  // We don't define row because we want that the content defines the rows.
+  grid-template-columns: min-content 1fr;
+  row-gap: 1.5rem; // gap is the shorthand for row/column-gap. // add some space between the columns and rows.
+  column-gap: 2.5rem; // gap is the shorthand for row/column-gap. // add some space between the columns and rows.
+
+  &__icon {
+    fill: base.$color-primary;
+    width: 4.5rem;
+    height: 4.5rem;
+    grid-row: 1 / span 2; // Instead of span 2  we would use -1 but we don't define any explicit row in .feature, -1 defines for explicit
+    //not Implicit grids.
+    transform: translateY(-1rem);
+  }
+
+  &__text {
+    font-size: 1.7rem;
+  }
+}
